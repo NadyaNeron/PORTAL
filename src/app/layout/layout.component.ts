@@ -36,9 +36,6 @@ import {TuiAccordion} from '@taiga-ui/kit';
   standalone: true,
   imports: [
     FormsModule,
-    KeyValuePipe,
-    NgForOf,
-    RouterLink,
     RouterLinkActive,
     TuiAppearance,
     TuiAvatar,
@@ -78,8 +75,8 @@ import {TuiAccordion} from '@taiga-ui/kit';
             Menu
             <div *tuiSidebar="open; direction: 'left'">
                 <tui-data-list size="l">
-                <button tuiOption >Сотрудники</button>
-                <button tuiOption >Проекты</button>
+                    <button tuiOption (click)="nav('app/employees')">Сотрудники</button>
+                    <button tuiOption (click)="nav('app/projects')">Проекты</button>
                 </tui-data-list>
             </div>
             </button>
@@ -98,9 +95,7 @@ import {TuiAccordion} from '@taiga-ui/kit';
         </tui-app-bar>
     </section>
     <section class="down-section">
-        <main  class="content" tuiNavigationMain>
-            <router-outlet></router-outlet>
-        </main>
+        <router-outlet></router-outlet>
     </section>
     </div>
   `,
@@ -112,36 +107,14 @@ export class LayoutComponent {
     protected open = false;
     protected switch = false;
 
-    constructor(private router:Router){
-
-    }
-
-    protected readonly drawer = [
-          {name: 'Сотрудники', icon: "", link:"/employees" },
-          {name: 'Проекты', icon: "", link:""},
-    ]
+    constructor(private router:Router){}
     
     protected setOpen = () => {
         this.open = !this.open
     }
     protected nav = (link:string) => {
-        if(link)this.router.navigate([link])
+        if(!!link) this.router.navigate([link])
     }
-    protected readonly webApis = [
-        'Common',
-        'Audio',
-        'Canvas',
-        'Geolocation',
-        'MIDI',
-        'Workers',
-    ];
- 
-    protected readonly taigaFamilyProducts = [
-        'Taiga-UI',
-        'ng-event-plugins',
-        'ng-polymorpheus',
-        'ng-dompurify',
-    ];
  
     protected toggle(open: boolean): void {
         this.open = open;

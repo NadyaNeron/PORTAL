@@ -1,0 +1,30 @@
+.container{
+    width:100%;
+    max-height: auto;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    // padding: 40px 40px 40px 0px;
+    padding-top: 40px;
+}
+.pagename{
+    font-size: 50px;
+    height: 100%;
+    text-align: center;
+    display: flex;
+    align-items: center;
+}
+.header-container{
+    height: 80px;
+    width: 100%;
+    display: flex;
+    justify-content: start;
+    margin-bottom: 15px;
+
+}
+.page{
+    padding: 40px 10% 0 10%;
+    height: 90vh;
+    max-height: 90vh;
+    overflow-y: scroll;
+}

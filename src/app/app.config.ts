@@ -16,6 +16,7 @@ import { AuthPageComponent } from './auth/auth-page/auth.page.component';
 import { LayoutComponent } from "./layout/layout.component";
 import { EmployeesPageComponent } from "./employee/pages/employees-page/employees.page.component";
 import { EmployeePageComponent } from "./employee/pages/employee-page/employee.page.component";
+import { ProjectsPageComponent } from "./projects/pages/projects-page/projects.page.component";
 
 registerLocaleData(ru);
 
@@ -36,6 +37,10 @@ const routes: Routes = [
         {
           path: "employees/:id",
           component: EmployeePageComponent
+        },
+        {
+          path: "projects",
+          component: ProjectsPageComponent
         }
       ]
     },

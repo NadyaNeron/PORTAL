@@ -1,6 +1,5 @@
 import { Component, input } from '@angular/core';
 import {TuiCardLarge, TuiHeader} from '@taiga-ui/layout';
-import {KeyValuePipe, NgForOf} from '@angular/common';
 import { TuiAppearance } from '@taiga-ui/core';
 import { Router } from '@angular/router';
 import { EmployeeShort } from '../../types/employee.short';
