@@ -5,10 +5,13 @@
 
 .sidebar-item{
     font-weight: bold !important;
-    font-size: large !important;
+    font-size: 25px;
+    height: 60px;
+    display: flex;
 }
-.sidebar-item:hover{
-    background-color: (82, 110, 211, 0.5);
+
+.sidebar-item.active{
+    text-decoration: underline;
 }
 
 .content{
@@ -17,6 +20,18 @@
 }
 :host{
     overflow: hidden;
+}
+.sidebar{
+    width: auto;
+    top:0;
+    border-radius: 0;
+}
+.sidebar-content{
+    display: flex;
+    flex-direction: column;
+    padding-right: 20px;
+    justify-content: center;
+    padding-top: 30px;
 }
 .container{
     overflow: hidden;

@@ -12,8 +12,6 @@ import { FormsModule } from '@angular/forms';
       <div
           tuiAppearance="floating"
           tuiCardLarge
-          tuiHeader
-          class="card"
       >
         <app-employee-form [disabled]="true" [(ngModel)]="employeeInput"></app-employee-form>
       </div>

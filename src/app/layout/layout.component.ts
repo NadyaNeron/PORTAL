@@ -5,8 +5,9 @@ import { KeyValuePipe } from '@angular/common';
 import { Router, RouterLink, RouterLinkActive, RouterModule } from '@angular/router';
 import {ChangeDetectionStrategy} from '@angular/core';
 import {TuiButton, TuiLink, TuiPopup, TuiScrollbar, TuiTitle} from '@taiga-ui/core';
-import {TuiBadge, TuiDrawer, TuiTabs} from '@taiga-ui/kit';
+import {TuiAvatar, TuiBadge, TuiDrawer, TuiTabs} from '@taiga-ui/kit';
 import {TuiHeader, TuiNavigation} from '@taiga-ui/layout';
+import { TuiRepeatTimes } from '@taiga-ui/cdk';
 @Component({
   selector: 'app-layout',
   standalone: true,
@@ -25,6 +26,8 @@ import {TuiHeader, TuiNavigation} from '@taiga-ui/layout';
     TuiScrollbar,
     TuiTabs,
     TuiTitle,
+    TuiAvatar,
+    RouterModule
 ],
   template: `
   <div class="container">
@@ -38,137 +41,38 @@ import {TuiHeader, TuiNavigation} from '@taiga-ui/layout';
                 (click)="open.set(!open())"
                 size="xl"
             >
-            Menu
-            <tui-drawer *tuiPopup="open()">
-                <header>
-                    <h2 tuiHeader>
-                        <div tuiTitle>
-                            <span tuiCaption>Caption・caption</span>
-                            <span>
-                                Drawer title
-                                <tui-badge>Label</tui-badge>
-                            </span>
-                            <span tuiSubtitle>
-                                In publishing and graphic design, Lorem ipsum is a placeholder text commonly used.
-                            </span>
-                        </div>
-            
-                        <div tuiAccessories>
-                            <button
-                                iconStart="@tui.search"
-                                tuiButton
-                                type="button"
-                            >
-                                More info
-                            </button>
-                            <button
-                                iconStart="@tui.ellipsis"
-                                tuiIconButton
-                                type="button"
-                            >
-                                Actions
-                            </button>
-                            <button
-                                appearance="icon"
-                                iconStart="@tui.x"
-                                tuiIconButton
-                                type="button"
-                                (click)="open.set(false)"
-                            >
-                                Close
-                            </button>
-                        </div>
-                    </h2>
-                    <div>
-                        <button
-                            tuiButton
-                            type="button"
-                        >
-                            Action 1
-                        </button>
-                        <a
-                            appearance="action"
-                            href="#"
-                            tuiButton
-                        >
-                            Action 2
-                        </a>
-                        <button
-                            tuiLink
-                            type="button"
-                        >
-                            Action 3
-                        </button>
-                    </div>
-                    <nav tuiNavigationNav>
-                        <tui-tabs>
-                            <button
-                                tuiTab
-                                type="button"
-                            >
-                                Default view
-                            </button>
-                            <button
-                                tuiTab
-                                type="button"
-                            >
-                                Details
-                            </button>
-                            <button
-                                tuiTab
-                                type="button"
-                            >
-                                Followers
-                            </button>
-                        </tui-tabs>
-                        <hr />
-                        <button
-                            size="xs"
-                            tuiButton
-                            type="button"
-                        >
-                            Primary
-                        </button>
-                        <button
-                            appearance="secondary"
-                            iconStart="@tui.ellipsis"
-                            size="xs"
-                            tuiIconButton
-                            type="button"
-                        >
-                            More
-                        </button>
-                    </nav>
-                </header>
-                <p *tuiRepeatTimes="let index of 15">Content</p>
-                <footer>
-                    <button
-                        size="m"
-                        tuiButton
-                        type="button"
-                        [style.margin-inline-end]="'auto'"
-                    >
-                        Tertiary action
-                    </button>
-                    <button
-                        size="m"
-                        tuiButton
-                        type="button"
-                    >
-                        Secondary action
-                    </button>
-                    <button
-                        appearance="primary"
-                        size="m"
-                        tuiButton
-                        type="button"
-                    >
-                        Primary action
-                    </button>
-                </footer>
-            </tui-drawer>
-
+                Menu
             </button>
+            <tui-drawer 
+                class="sidebar" 
+                *tuiPopup="open()" 
+                direction="left"
+                [overlay]="true"
+                (click.self)="onClose()"
+            >
+                <div class="sidebar-content">
+                    <a 
+                        [routerLink]="['/app/employees']" 
+                        tuiLink 
+                        class="sidebar-item" 
+                        routerLinkActive="active" 
+                        ariaCurrentWhenActive="page"
+                        (click)="onClose()"
+                    >
+                        Сотрудники
+                    </a>
+                    <a 
+                        [routerLink]="['/app/projects']"  
+                        tuiLink 
+                        class="sidebar-item"  
+                        routerLinkActive="active" 
+                        ariaCurrentWhenActive="page"
+                        (click)="onClose()"
+                    >
+                        Проекты
+                    </a>
+                </div>
+            </tui-drawer>
             <label tuiTitle="l" style="color:var(--primary-color)">
                 PORTAL
             </label>
@@ -201,5 +105,7 @@ export class LayoutComponent {
     protected nav = (link:string) => {
         if(!!link) this.router.navigate([link])
     }
- 
+    public onClose(): void {
+        this.open.set(false);
+    }
 }

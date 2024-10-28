@@ -13,43 +13,43 @@ import { EmployeeFull, EmployeeFullPartial } from '../../types/employee.full.';
   imports: [TuiInputModule, TuiInputPhoneModule, TuiTextfield, ReactiveFormsModule],
   template: `
     <fieldset class="container" [disabled]="disabled()">
-    <form class="container"  [formGroup]="employeeForm">
-      <tui-textfield class="auth-input">
-        <label tuiLabel>ФИО</label>
-        <input
-            tuiTextfield
-            formControlName="fio"
-        />
-      </tui-textfield>
-      <tui-textfield class="auth-input">
-      <label tuiLabel>Логин</label>
-        <input
-            tuiTextfield
-            formControlName="login"
-        />
-      </tui-textfield> 
-      <tui-textfield class="auth-input">
-        <label tuiLabel>Должность</label>
-        <input
-            tuiTextfield
-            formControlName="position"
-        />
-      </tui-textfield> 
-      <tui-textfield class="auth-input">
-        <label tuiLabel>Телефон</label>
-        <input
-            tuiTextfield
-            formControlName="phone"
-        />
-      </tui-textfield> 
-      <tui-textfield class="auth-input">
-        <label tuiLabel>Почта</label>
-        <input
-            tuiTextfield
-            formControlName="email"
-        />
-      </tui-textfield>
-    </form>
+      <form  [formGroup]="employeeForm">
+        <tui-textfield class="user-input">
+          <label tuiLabel>ФИО</label>
+          <input
+              tuiTextfield
+              formControlName="fio"
+          />
+        </tui-textfield>
+        <tui-textfield class="user-input">
+        <label tuiLabel>Логин</label>
+          <input
+              tuiTextfield
+              formControlName="login"
+          />
+        </tui-textfield> 
+        <tui-textfield class="user-input">
+          <label tuiLabel>Должность</label>
+          <input
+              tuiTextfield
+              formControlName="position"
+          />
+        </tui-textfield> 
+        <tui-textfield class="user-input">
+          <label tuiLabel>Телефон</label>
+          <input
+              tuiTextfield
+              formControlName="phone"
+          />
+        </tui-textfield> 
+        <tui-textfield class="user-input">
+          <label tuiLabel>Почта</label>
+          <input
+              tuiTextfield
+              formControlName="email"
+          />
+        </tui-textfield>
+      </form>
     </fieldset>
   `,
   styleUrl: `./employee.form.component.scss`,
