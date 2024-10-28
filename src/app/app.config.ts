@@ -17,6 +17,7 @@ import { LayoutComponent } from "./layout/layout.component";
 import { EmployeesPageComponent } from "./employee/pages/employees-page/employees.page.component";
 import { EmployeePageComponent } from "./employee/pages/employee-page/employee.page.component";
 import { ProjectsPageComponent } from "./projects/pages/projects-page/projects.page.component";
+import { EmployeesRoutes } from "./employee/routes";
 
 registerLocaleData(ru);
 
@@ -30,13 +31,9 @@ const routes: Routes = [
       path:'app',
       component:LayoutComponent,
       children: [
-        {
-          path:'employees',
-          component: EmployeesPageComponent,
-        },
-        {
-          path: "employees/:id",
-          component: EmployeePageComponent
+        { 
+          path: 'employees', 
+          children: [...EmployeesRoutes]
         },
         {
           path: "projects",
