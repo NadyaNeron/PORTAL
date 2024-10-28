@@ -9,9 +9,10 @@ import { ActivatedRoute, Router } from '@angular/router';
   imports: [AuthFormComponent, TuiButton],
   template: `
     <div style="display:flex; width:100%; height:100%; align-items:center; flex-direction:column; padding-top: 10%">
-      <p style="color:#526ed3;font-size:50px;font-weight:bolder;margin-bottom:20px">АВТОРИЗАЦИЯ</p>
+      <p style="color:var(--primary-color);font-size:50px;font-weight:bolder;margin-bottom:60px">АВТОРИЗАЦИЯ</p>
       <app-auth-form></app-auth-form>
       <button
+        style="margin-top:40px; width:10%; font-size:x-large"
         tuiButton
         (click)="Auth()"
       >

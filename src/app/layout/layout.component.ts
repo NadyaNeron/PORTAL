@@ -1,63 +1,30 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import {TuiAppBar} from '@taiga-ui/layout';
-import {tuiAsPortal, TuiPortals, TuiRepeatTimes} from '@taiga-ui/cdk';
-import {
-    TuiAppearance,
-    TuiButton,
-    TuiDataList,
-    TuiDropdown,
-    TuiDropdownService,
-    TuiIcon,
-    TuiTitle,
-} from '@taiga-ui/core';
-import {
-    TuiAvatar,
-    TuiBadge,
-    TuiBadgeNotification,
-    TuiChevron,
-    TuiDataListDropdownManager,
-    TuiFade,
-    TuiSwitch,
-    TuiTabs,
-} from '@taiga-ui/kit';
-import {TuiCardLarge, TuiHeader, TuiNavigation} from '@taiga-ui/layout';
 import { FormsModule } from '@angular/forms';
 import { KeyValuePipe } from '@angular/common';
 import { Router, RouterLink, RouterLinkActive, RouterModule } from '@angular/router';
-import {NgForOf} from '@angular/common';
 import {ChangeDetectionStrategy} from '@angular/core';
-import {TuiSidebar} from '@taiga-ui/addon-mobile';
-import {TuiActiveZone} from '@taiga-ui/cdk';
-import {TuiLink} from '@taiga-ui/core';
-import {TuiAccordion} from '@taiga-ui/kit';
-
+import {TuiButton, TuiLink, TuiPopup, TuiScrollbar, TuiTitle} from '@taiga-ui/core';
+import {TuiBadge, TuiDrawer, TuiTabs} from '@taiga-ui/kit';
+import {TuiHeader, TuiNavigation} from '@taiga-ui/layout';
 @Component({
   selector: 'app-layout',
   standalone: true,
   imports: [
+    TuiAppBar,
     FormsModule,
     RouterLinkActive,
-    TuiAppearance,
-    TuiAvatar,
     TuiBadge,
-    TuiBadgeNotification,
     TuiButton,
-    TuiCardLarge,
-    TuiChevron,
-    TuiDataList,
-    TuiDataListDropdownManager,
-    TuiDropdown,
-    TuiFade,
+    TuiDrawer,
     TuiHeader,
-    TuiIcon,
+    TuiLink,
     TuiNavigation,
+    TuiPopup,
     TuiRepeatTimes,
-    TuiSwitch,
+    TuiScrollbar,
     TuiTabs,
     TuiTitle,
-    TuiAppBar,
-    RouterModule,
-    TuiAccordion, TuiActiveZone, TuiButton, TuiLink, TuiSidebar
 ],
   template: `
   <div class="container">
@@ -68,19 +35,141 @@ import {TuiAccordion} from '@taiga-ui/kit';
                 iconStart="@tui.menu"
                 tuiSlot="left"
                 type="button"
-                (click)="toggle(true)"
-                (tuiActiveZoneChange)="toggle($event)"
-                style="margin-left:20px"
+                (click)="open.set(!open())"
+                size="xl"
             >
             Menu
-            <div *tuiSidebar="open; direction: 'left'">
-                <tui-data-list size="l">
-                    <button tuiOption (click)="nav('app/employees')">Сотрудники</button>
-                    <button tuiOption (click)="nav('app/projects')">Проекты</button>
-                </tui-data-list>
-            </div>
+            <tui-drawer *tuiPopup="open()">
+                <header>
+                    <h2 tuiHeader>
+                        <div tuiTitle>
+                            <span tuiCaption>Caption・caption</span>
+                            <span>
+                                Drawer title
+                                <tui-badge>Label</tui-badge>
+                            </span>
+                            <span tuiSubtitle>
+                                In publishing and graphic design, Lorem ipsum is a placeholder text commonly used.
+                            </span>
+                        </div>
+            
+                        <div tuiAccessories>
+                            <button
+                                iconStart="@tui.search"
+                                tuiButton
+                                type="button"
+                            >
+                                More info
+                            </button>
+                            <button
+                                iconStart="@tui.ellipsis"
+                                tuiIconButton
+                                type="button"
+                            >
+                                Actions
+                            </button>
+                            <button
+                                appearance="icon"
+                                iconStart="@tui.x"
+                                tuiIconButton
+                                type="button"
+                                (click)="open.set(false)"
+                            >
+                                Close
+                            </button>
+                        </div>
+                    </h2>
+                    <div>
+                        <button
+                            tuiButton
+                            type="button"
+                        >
+                            Action 1
+                        </button>
+                        <a
+                            appearance="action"
+                            href="#"
+                            tuiButton
+                        >
+                            Action 2
+                        </a>
+                        <button
+                            tuiLink
+                            type="button"
+                        >
+                            Action 3
+                        </button>
+                    </div>
+                    <nav tuiNavigationNav>
+                        <tui-tabs>
+                            <button
+                                tuiTab
+                                type="button"
+                            >
+                                Default view
+                            </button>
+                            <button
+                                tuiTab
+                                type="button"
+                            >
+                                Details
+                            </button>
+                            <button
+                                tuiTab
+                                type="button"
+                            >
+                                Followers
+                            </button>
+                        </tui-tabs>
+                        <hr />
+                        <button
+                            size="xs"
+                            tuiButton
+                            type="button"
+                        >
+                            Primary
+                        </button>
+                        <button
+                            appearance="secondary"
+                            iconStart="@tui.ellipsis"
+                            size="xs"
+                            tuiIconButton
+                            type="button"
+                        >
+                            More
+                        </button>
+                    </nav>
+                </header>
+                <p *tuiRepeatTimes="let index of 15">Content</p>
+                <footer>
+                    <button
+                        size="m"
+                        tuiButton
+                        type="button"
+                        [style.margin-inline-end]="'auto'"
+                    >
+                        Tertiary action
+                    </button>
+                    <button
+                        size="m"
+                        tuiButton
+                        type="button"
+                    >
+                        Secondary action
+                    </button>
+                    <button
+                        appearance="primary"
+                        size="m"
+                        tuiButton
+                        type="button"
+                    >
+                        Primary action
+                    </button>
+                </footer>
+            </tui-drawer>
+
             </button>
-            <label tuiTitle="l">
+            <label tuiTitle="l" style="color:var(--primary-color)">
                 PORTAL
             </label>
             <button
@@ -89,7 +178,7 @@ import {TuiAccordion} from '@taiga-ui/kit';
                 type="button"
                 class="login-btn"
             >
-                Логин
+                login
                 <tui-avatar src="AI" />
             </button>
         </tui-app-bar>
@@ -104,19 +193,13 @@ import {TuiAccordion} from '@taiga-ui/kit';
 })
 export class LayoutComponent {
     protected expanded = false;
-    protected open = false;
     protected switch = false;
+    protected readonly open = signal(false);
 
     constructor(private router:Router){}
     
-    protected setOpen = () => {
-        this.open = !this.open
-    }
     protected nav = (link:string) => {
         if(!!link) this.router.navigate([link])
     }
  
-    protected toggle(open: boolean): void {
-        this.open = open;
-    }
 }
