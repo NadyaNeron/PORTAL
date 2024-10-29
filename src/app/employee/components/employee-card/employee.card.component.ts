@@ -3,31 +3,21 @@ import {TuiCardLarge, TuiHeader} from '@taiga-ui/layout';
 import { TuiAppearance } from '@taiga-ui/core';
 import { Router } from '@angular/router';
 import { EmployeeShort } from '../../types/employee.short';
+import { CardComponent } from "../../../shared/components/card/card.component";
 @Component({
   selector: 'app-employee-card',
   standalone: true,
-  imports: [TuiCardLarge, TuiHeader, TuiAppearance],
+  imports: [TuiCardLarge, TuiHeader, TuiAppearance, CardComponent],
   template: `
-      <div
-          tuiAppearance="floating"
-          tuiCardLarge
-          tuiHeader
-          class="card"
-          (click)="goToTaskPage()"
-      >
-        <h2 tuiTitle>
-            {{employee()?.fio}}
-            <span tuiSubtitle>{{employee()?.position}}</span>
-        </h2>
-      </div>
-  `,
-  styleUrl: `./employee.card.component.scss`
+      <app-card (click)="goToEmployeePage()" [title]="employee().fio" [subTitle]="employee().position"/>
+  `
 })
 export class EmployeeCardComponent {
-  public employee = input<EmployeeShort>()
+  public employee = input.required<EmployeeShort>()
+
   constructor(private router: Router){}
-  public goToTaskPage(){
-    console.log("hi")
-    this.router.navigate(["/app","employees", "1"])
+
+  public goToEmployeePage(){
+    this.router.navigate(["/app","employees", this.employee().id])
   }
 }

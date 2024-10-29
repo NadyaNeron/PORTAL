@@ -14,7 +14,7 @@ import { ActivatedRoute, Router } from '@angular/router';
       <button
         style="margin-top:40px; width:10%; font-size:x-large"
         tuiButton
-        (click)="Auth()"
+        (click)="auth()"
       >
         Войти
       </button>
@@ -23,9 +23,9 @@ import { ActivatedRoute, Router } from '@angular/router';
   styles: ``
 })
 export class AuthPageComponent {
-
   constructor(private router: Router, private route: ActivatedRoute){}
-  public Auth = () => {
+  
+  public auth = () => {
     this.router.navigate(["../app/employees"], {relativeTo: this.route})
   }
 }

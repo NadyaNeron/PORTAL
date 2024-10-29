@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ControlValueAccessor } from '@angular/forms';
 import {TuiInputModule} from '@taiga-ui/legacy';
 @Component({
   selector: 'app-auth-form',
@@ -26,6 +27,18 @@ import {TuiInputModule} from '@taiga-ui/legacy';
   `,
   styleUrl: `./auth.form.component.scss`
 })
-export class AuthFormComponent {
+export class AuthFormComponent implements ControlValueAccessor {
+    writeValue(obj: any): void {
+        throw new Error('Method not implemented.');
+    }
+    registerOnChange(fn: any): void {
+        throw new Error('Method not implemented.');
+    }
+    registerOnTouched(fn: any): void {
+        throw new Error('Method not implemented.');
+    }
+    setDisabledState?(isDisabled: boolean): void {
+        throw new Error('Method not implemented.');
+    }
 
 }

@@ -29,7 +29,7 @@ export class EmployeeListComponent {
         phone:"+79809009090",
         position:"Менеджер",
         login:"ivanov",
-        id:1
+        id:"1"
       },
       {
         fio: "Иванов Иван Иванович",
@@ -37,28 +37,31 @@ export class EmployeeListComponent {
         phone:"+79809009090",
         position:"Менеджер",
         login:"ivanov",
-        id:2
-      },      {
+        id:"2"
+      },      
+      {
         fio: "Иванов Иван Иванович",
         email: "ivanov@mail.ru",
         phone:"+79809009090",
         position:"Менеджер",
         login:"ivanov",
-        id:3
-      },      {
+        id:"3"
+      },      
+      {
         fio: "Иванов Иван Иванович",
         email: "ivanov@mail.ru",
         phone:"+79809009090",
         position:"Менеджер",
         login:"ivanov",
-        id:4
-      },      {
+        id:"4"
+      },      
+      {
         fio: "Иванов Иван Иванович",
         email: "ivanov@mail.ru",
         phone:"+79809009090",
         position:"Менеджер",
         login:"ivanov",
-        id:5
+        id:"5"
       }
   ]
 }

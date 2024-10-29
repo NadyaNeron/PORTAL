@@ -21,6 +21,7 @@ import { FormsModule } from '@angular/forms';
 export class EmployeeDetailsComponent {
   public employeeInput = signal(
     {
+      id:"1",
       fio: "Иванов Иван Иванович",
       email: "ivanov@mail.ru",
       phone:"+79809009090",

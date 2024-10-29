@@ -38,7 +38,7 @@ import { TuiRepeatTimes } from '@taiga-ui/cdk';
                 iconStart="@tui.menu"
                 tuiSlot="left"
                 type="button"
-                (click)="open.set(!open())"
+                (click)="toggleSidebarState()"
                 size="xl"
             >
                 Menu
@@ -96,16 +96,16 @@ import { TuiRepeatTimes } from '@taiga-ui/cdk';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LayoutComponent {
-    protected expanded = false;
-    protected switch = false;
     protected readonly open = signal(false);
 
     constructor(private router:Router){}
     
-    protected nav = (link:string) => {
-        if(!!link) this.router.navigate([link])
-    }
     public onClose(): void {
         this.open.set(false);
+    }
+
+    public toggleSidebarState(){
+        const currState = open()
+        this.open.set(!currState)
     }
 }

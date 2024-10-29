@@ -1,3 +1,6 @@
-import { EmployeeFull } from "./employee.full."
+export interface EmployeeShort {
+    position: string,
+    fio:string,
+    id:string,
+}
   
-export type EmployeeShort = Omit<EmployeeFull, 'email'| 'phone' | 'login'>

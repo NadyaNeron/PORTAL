@@ -97,9 +97,7 @@ export class EmployeeFormComponent implements ControlValueAccessor{
     }
   }
   registerOnTouched(fn: () => void): void {
-    this.onTouches = () => {
-      fn()
-    }
+    this.onTouches = fn;
   }
   setDisabledState?(isDisabled: boolean): void {
     // isDisabled? this.employeeForm.disable({ emitEvent: false }) : this.employeeForm.enable({ emitEvent: false });
