@@ -1,8 +1,7 @@
 import { Component, signal } from '@angular/core';
 import {TuiAppBar} from '@taiga-ui/layout';
 import { FormsModule } from '@angular/forms';
-import { KeyValuePipe } from '@angular/common';
-import { Router, RouterLink, RouterLinkActive, RouterModule } from '@angular/router';
+import { RouterLinkActive, RouterModule } from '@angular/router';
 import {ChangeDetectionStrategy} from '@angular/core';
 import {TuiButton, TuiLink, TuiPopup, TuiScrollbar, TuiTitle} from '@taiga-ui/core';
 import {TuiAvatar, TuiBadge, TuiDrawer, TuiTabs} from '@taiga-ui/kit';
@@ -96,16 +95,13 @@ import { TuiRepeatTimes } from '@taiga-ui/cdk';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LayoutComponent {
-    protected readonly open = signal(false);
+    protected open = signal(false);
 
-    constructor(private router:Router){}
-    
     public onClose(): void {
         this.open.set(false);
     }
 
     public toggleSidebarState(){
-        const currState = open()
-        this.open.set(!currState)
+        this.open.set(!this.open())
     }
 }

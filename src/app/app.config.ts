@@ -14,10 +14,6 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { provideHttpClient } from '@angular/common/http';
 import { AuthPageComponent } from './auth/auth-page/auth.page.component';
 import { LayoutComponent } from "./layout/layout.component";
-import { EmployeesPageComponent } from "./employee/pages/employees-page/employees.page.component";
-import { EmployeePageComponent } from "./employee/pages/employee-page/employee.page.component";
-import { ProjectsPageComponent } from "./projects/pages/projects-page/projects.page.component";
-import { EmployeesRoutes } from "./employee/routes";
 
 registerLocaleData(ru);
 
@@ -29,20 +25,31 @@ const routes: Routes = [
     },
     {
       path:'app',
-      component:LayoutComponent,
+      component: LayoutComponent,
       children: [
         { 
-          path: 'employees', 
-          children: [...EmployeesRoutes]
+          path: 'employees',
+          loadChildren: () => import('./employee/routes').then((m) => m.EmployeesRoutes),
         },
         {
           path: "projects",
-          component: ProjectsPageComponent
+          loadComponent: () => import('./projects/pages/projects-page/projects.page.component').then((m => m.ProjectsPageComponent)),
         }
       ]
     },
 ];
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideAnimations(), provideRouter(routes), provideProtractorTestingSupport(), provideStore(), provideEffects(), provideNzI18n(ru_RU), importProvidersFrom(FormsModule), provideAnimationsAsync(), provideHttpClient(), NG_EVENT_PLUGINS]
+  providers: [
+    provideAnimations(),
+    provideRouter(routes),
+    provideProtractorTestingSupport(),
+    provideStore(),
+    provideEffects(),
+    provideNzI18n(ru_RU),
+    importProvidersFrom(FormsModule),
+    provideAnimationsAsync(),
+    provideHttpClient(),
+    NG_EVENT_PLUGINS,
+  ]
 };

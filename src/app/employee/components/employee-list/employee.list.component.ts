@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { EmployeeCardComponent } from "../employee-card/employee.card.component";
-import {KeyValuePipe, NgForOf} from '@angular/common';
-import {tuiAsPortal, TuiPortals, TuiRepeatTimes} from '@taiga-ui/cdk';
+import {TuiRepeatTimes} from '@taiga-ui/cdk';
 
 @Component({
   selector: 'app-employee-list',

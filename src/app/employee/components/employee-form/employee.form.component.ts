@@ -1,11 +1,10 @@
 import { Component, DestroyRef, forwardRef, inject, input } from '@angular/core';
-import { ControlValueAccessor, FormControl, FormGroup, FormsModule, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/forms';
+import { ControlValueAccessor, FormControl, FormGroup, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/forms';
 import { tuiTakeUntilDestroyed } from '@taiga-ui/cdk';
 import { TuiTextfield } from '@taiga-ui/core';
-import { TuiInputPhoneInternational } from '@taiga-ui/kit';
 import {TuiInputModule} from '@taiga-ui/legacy';
 import {TuiInputPhoneModule} from '@taiga-ui/legacy';
-import { EmployeeFull, EmployeeFullPartial } from '../../types/employee.full.';
+import { EmployeeFullPartial } from '../../types/employee.full.';
 
 @Component({
   selector: 'app-employee-form',
