@@ -35,7 +35,7 @@
         }
       },
       "root": "",
-      "sourceRoot": "src/app",
+      "sourceRoot": "src",
       "prefix": "app",
       "architect": {
         "build": {
@@ -48,7 +48,7 @@
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
-              "src/app/assets",
+              "src/assets",
               {
                 "glob": "**/*",
                 "input": "node_modules/@taiga-ui/icons/src",

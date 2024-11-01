@@ -3,4 +3,3 @@ export interface EmployeeShort {
     fio:string,
     id:string,
 }
-  

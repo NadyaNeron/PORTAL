@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { EmployeeListComponent } from "../../components/employee-list/employee.list.component";
+import { Store } from '@ngrx/store';
+import { EmployeesPageActions } from 'src/app/state/employees/employees.actions';
 
 @Component({
   selector: 'app-employees-page',
@@ -19,6 +21,15 @@ import { EmployeeListComponent } from "../../components/employee-list/employee.l
   `,
   styleUrl: `./employees.page.component.scss`
 })
-export class EmployeesPageComponent {
+export class EmployeesPageComponent implements OnInit{
 
+  constructor(private store: Store) {}
+
+  ngOnInit(): void {
+    this.loadEmployees();
+  }
+
+  loadEmployees(): void {
+    this.store.dispatch(EmployeesPageActions.load());
+  }
 }

@@ -1,0 +1,61 @@
+{
+    "employees": [
+        { 
+            "id": "1", 
+            "fio": "Иванов Иван Иванович", 
+            "position": "Разработчик",
+            "login": "invanov",
+            "email": "ivanov@mail.ru",
+            "phone": "+79859009090"
+        },
+        { 
+            "id": "2", 
+            "fio": "Иванов Иван Иванович", 
+            "position": "Разработчик",
+            "login": "invanov",
+            "email": "ivanov@mail.ru",
+            "phone": "+79859009090"
+        },        
+        { 
+            "id": "3", 
+            "fio": "Иванов Иван Иванович", 
+            "position": "Разработчик",
+            "login": "invanov",
+            "email": "ivanov@mail.ru",
+            "phone": "+79859009090"
+        },        
+        { 
+            "id": "4", 
+            "fio": "Иванов Иван Иванович", 
+            "position": "Разработчик",
+            "login": "invanov",
+            "email": "ivanov@mail.ru",
+            "phone": "+79859009090"
+        },        
+        { 
+            "id": "5", 
+            "fio": "Иванов Иван Иванович", 
+            "position": "Разработчик",
+            "login": "invanov",
+            "email": "ivanov@mail.ru",
+            "phone": "+79859009090"
+        }
+    ],
+    "projects": [
+        { 
+            "id": "1", 
+            "name": "Project 1", 
+            "description": "Description of a project" 
+        },
+        { 
+            "id": "2", 
+            "name": "Project 2", 
+            "description": "Description description description description description description description descriptionof a project" 
+        },
+        { 
+            "id": "3", 
+            "name": "Project 3", 
+            "description": "Description description description description description description description description description description description description description description description description description description description descriptionof a project" 
+        }
+    ]
+  }
