@@ -1,6 +1,6 @@
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { UserService } from "./user.service";
-import { UserActions } from "./user.actions";
+import { UserActions, UserPageActions } from "./user.actions";
 import { catchError, map, of, switchMap } from "rxjs";
 import { Injectable, inject } from "@angular/core";
 
@@ -9,9 +9,9 @@ export class UserEffects {
     private userService = inject(UserService)
     constructor(private actions$:Actions){}
 
-    get$ = createEffect(() => 
+    load$ = createEffect(() => 
         this.actions$.pipe(
-            ofType(UserActions.get),
+            ofType(UserPageActions.load),
             switchMap(({userId}) => 
                 this.userService.getUser(userId).pipe(
                     map((user) => UserActions.success({ user })),

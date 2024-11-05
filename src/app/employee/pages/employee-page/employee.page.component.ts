@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { EmployeeActions, EmployeePageActions } from 'src/app/state/employee/employee.actions';
 import { tuiTakeUntilDestroyed } from '@taiga-ui/cdk';
+import { UserPageActions } from 'src/app/state/user/user.actions';
 
 @Component({
   selector: 'app-employee-page',
@@ -45,8 +46,8 @@ export class EmployeePageComponent implements OnInit{
       tuiTakeUntilDestroyed(this.destroyRef)
     )
     .subscribe((params)=> {
-      const employeeId = Number(params['id'])
-      this.store.dispatch(EmployeePageActions.load({ employeeId }))
+      const userId = params['id']
+      this.store.dispatch(UserPageActions.load({ userId }))
     })
   }
 }

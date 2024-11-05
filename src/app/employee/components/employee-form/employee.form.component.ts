@@ -5,6 +5,7 @@ import { TuiTextfield } from '@taiga-ui/core';
 import {TuiInputModule} from '@taiga-ui/legacy';
 import {TuiInputPhoneModule} from '@taiga-ui/legacy';
 import { EmployeeFullPartial } from '../../types/employee.full.';
+import { UserPartial } from 'src/app/shared/types/user';
 
 @Component({
   selector: 'app-employee-form',
@@ -17,37 +18,66 @@ import { EmployeeFullPartial } from '../../types/employee.full.';
           <label tuiLabel>ФИО</label>
           <input
               tuiTextfield
-              formControlName="fio"
+              formControlName="name"
           />
         </tui-textfield>
         <tui-textfield class="user-input">
-        <label tuiLabel>Логин</label>
+        <label tuiLabel>Email</label>
           <input
               tuiTextfield
-              formControlName="login"
+              formControlName="email"
           />
-        </tui-textfield> 
+        </tui-textfield>
         <tui-textfield class="user-input">
-          <label tuiLabel>Должность</label>
+
+        <label tuiLabel>Telegram</label>
           <input
               tuiTextfield
-              formControlName="position"
+              formControlName="telegram"
           />
-        </tui-textfield> 
+          </tui-textfield>
+        <tui-textfield class="user-input">
+        <label tuiLabel>День рождения</label>
+          <input
+              tuiTextfield
+              formControlName="birthday"
+          />
+          </tui-textfield>
+        <tui-textfield class="user-input">
+        <label tuiLabel>Департамент</label>
+          <input
+              tuiTextfield
+              formControlName="department"
+          />
+          </tui-textfield>
+        <tui-textfield class="user-input">
+          <label tuiLabel>Отделение</label>
+          <input
+              tuiTextfield
+              formControlName="division"
+          />
+        </tui-textfield>
+        <tui-textfield class="user-input">
+          <label tuiLabel>Хобби</label>
+          <input
+              tuiTextfield
+              formControlName="hobby"
+          />
+        </tui-textfield>
         <tui-textfield class="user-input">
           <label tuiLabel>Телефон</label>
           <input
               tuiTextfield
               formControlName="phone"
           />
-        </tui-textfield> 
+        </tui-textfield>
         <tui-textfield class="user-input">
-          <label tuiLabel>Почта</label>
+          <label tuiLabel>Локация</label>
           <input
               tuiTextfield
-              formControlName="email"
+              formControlName="location"
           />
-        </tui-textfield>
+        </tui-textfield> 
       </form>
     </fieldset>
   `,
@@ -62,11 +92,16 @@ import { EmployeeFullPartial } from '../../types/employee.full.';
 })
 export class EmployeeFormComponent implements ControlValueAccessor{
   employeeForm = new FormGroup({
-    fio: new FormControl(''),
-    login: new FormControl(''),
-    position: new FormControl(''),
-    phone: new FormControl(''),
+    name: new FormControl(''),
+    role: new FormControl(''),
+    location: new FormControl(''),
     email: new FormControl(''),
+    phone: new FormControl(''),
+    telegram: new FormControl(''),
+    hobby: new FormControl(''),
+    department: new FormControl(''),
+    division: new FormControl(''),
+    birthday: new FormControl('')
   })
   public disabled = input<boolean>(false)
   private destroyRef = inject(DestroyRef)
@@ -86,12 +121,12 @@ export class EmployeeFormComponent implements ControlValueAccessor{
   writeValue(outsideValue: any): void {
     console.log(outsideValue)
     if (!outsideValue){
-      this.employeeForm.setValue({fio: '', phone:'', email:'', login:'', position:''}, { emitEvent: false })
+      this.employeeForm.setValue({name: '', location:'', email:'', phone:'', birthday:"", hobby:"", department:"", telegram:"", division:"", role:''}, { emitEvent: false })
     }
     else this.employeeForm.setValue(outsideValue, { emitEvent: false })
   }
-  registerOnChange(fn: (value: EmployeeFullPartial) => void): void {
-    this.onChanges = (value: EmployeeFullPartial) => {
+  registerOnChange(fn: (value: UserPartial) => void): void {
+    this.onChanges = (value: UserPartial) => {
       fn(structuredClone(value));
     }
   }

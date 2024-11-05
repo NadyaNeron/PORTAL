@@ -1,6 +1,5 @@
-import { createReducer, on } from "@ngrx/store"
-import { UserActions } from "./user.actions"
-import { loadavg } from "os"
+import { createFeature, createReducer, on } from "@ngrx/store"
+import { UserActions, UserPageActions } from "./user.actions"
 import { User } from "src/app/shared/types/user"
   
 
@@ -36,7 +35,13 @@ export const initialState:UserState = {
 
 export const userReducer = createReducer(
     initialState, 
-    on(UserActions.get, (state) => ({...state, loading:true})),
+    on(UserPageActions.load, (state) => ({...state, loading:true})),
     on(UserActions.success, (state, {user}) => ({...state, user, loading:false, isSucces:true})),
     on(UserActions.error, (state, {error}) => ({...state, error, loading:false, isSucces:false}))
 )
+
+
+export const userFeature = createFeature({
+    name: 'User feature',
+    reducer: userReducer,
+  })

@@ -10,7 +10,7 @@ import { UserShort } from 'src/app/shared/types/user.short';
   standalone: true,
   imports: [TuiCardLarge, TuiHeader, TuiAppearance, CardComponent],
   template: `
-      <app-card (click)="goToEmployeePage()" [title]="employee().name" [subTitle]="employee().role"/>
+      <app-card (click)="goToEmployeePage()" [title]="employee().name" [subTitle]="employee().role" [imageUrl]="employee().photoUrl"/>
   `
 })
 export class EmployeeCardComponent {

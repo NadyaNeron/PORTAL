@@ -6,6 +6,8 @@ import { FormsModule } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { employeeFeature } from 'src/app/state/employee/employee.reducer';
 import { EmployeeFullPartial } from '../../types/employee.full.';
+import { UserPartial } from 'src/app/shared/types/user';
+import { userFeature } from 'src/app/state/user/user.reducer';
 
 @Component({
   selector: 'app-employee-details',
@@ -22,16 +24,22 @@ import { EmployeeFullPartial } from '../../types/employee.full.';
   styles: ``
 })
 export class EmployeeDetailsComponent {
-  public employee = this.store.selectSignal<EmployeeFullPartial>(employeeFeature.selectEmployee)
+  public employee = this.store.selectSignal<UserPartial>(userFeature.selectUser)
 
   public employeeInput = computed(() =>{
     const employee = this.employee();
     return {
-      fio: employee.fio || "",
-      position: employee.position || "",
+      name: employee.name || "",
+      role: employee.role || "",
       phone: employee.phone || "",
-      login: employee.login || "",
-      email: employee.email || ""
+      location: employee.location || "",
+      email: employee.email || "",
+      department:employee.department || "",
+      division:employee.division || "",
+      birthday:employee.birthday || "",
+      hobby:employee.hobby || "",
+      telegram:employee.telegram || "",
+
     }
   });
 

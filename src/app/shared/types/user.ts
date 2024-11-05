@@ -25,3 +25,9 @@ export interface User {
     "role": string,
     "telegram": string
 }   
+
+type WithNull<T extends Record<string, any>> = {
+    [KEY in keyof T]: T[KEY] | null;
+  }
+  
+export type UserPartial = Partial<WithNull<Omit<User, 'id' | 'photoUrl' | 'competences' | 'clients'>>>

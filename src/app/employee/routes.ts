@@ -8,6 +8,8 @@ import { employeeFeature } from "../state/employee/employee.reducer";
 import { provideEffects } from "@ngrx/effects";
 import { usersFeature } from "../state/users/users.reducer";
 import { UsersEffects } from "../state/users/user.effects";
+import { userFeature } from "../state/user/user.reducer";
+import { UserEffects } from "../state/user/user.effects";
 
 export const EmployeesRoutes:Route[] = [
     {
@@ -20,6 +22,10 @@ export const EmployeesRoutes:Route[] = [
     },
     {
         path: ':id',
-        component: EmployeePageComponent
+        component: EmployeePageComponent,
+        providers: [
+            provideState(userFeature),
+            provideEffects([UserEffects])
+        ]
     }
 ]

@@ -17,6 +17,8 @@ export class UserService {
     constructor(){}
 
     getUser(id:string){
-        return this.http.get<User>(`${this.apiUrl()}/users/${id}`)
+        const res =  this.http.get<User>(`${this.apiUrl()}/users/${id}`)
+        console.log(res)
+        return res
     }
 }
