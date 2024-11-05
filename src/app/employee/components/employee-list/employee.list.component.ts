@@ -4,6 +4,7 @@ import {TuiRepeatTimes} from '@taiga-ui/cdk';
 import { Store } from '@ngrx/store';
 import { employeesFeature } from 'src/app/state/employees/employees.reducer';
 import { CommonModule } from '@angular/common';
+import { usersFeature } from 'src/app/state/users/users.reducer';
 
 @Component({
   selector: 'app-employee-list',
@@ -24,7 +25,7 @@ import { CommonModule } from '@angular/common';
   styles: ``
 })
 export class EmployeeListComponent{
-  protected employees = this.store.selectSignal(employeesFeature.selectEmployees);
+  protected employees = this.store.selectSignal(usersFeature.selectUsers);
 
   constructor(private store: Store) {}
 

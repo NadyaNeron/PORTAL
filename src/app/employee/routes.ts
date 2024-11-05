@@ -6,14 +6,16 @@ import { EmployeeEffects } from "../state/employee/employee.effects";
 import { provideState } from "@ngrx/store";
 import { employeeFeature } from "../state/employee/employee.reducer";
 import { provideEffects } from "@ngrx/effects";
+import { usersFeature } from "../state/users/users.reducer";
+import { UsersEffects } from "../state/users/user.effects";
 
 export const EmployeesRoutes:Route[] = [
     {
         path: '',
         component: EmployeesPageComponent,
         providers:[
-            provideState(employeeFeature),
-            provideEffects([EmployeeEffects, EmployeesEffects]), 
+            provideState(usersFeature),
+            provideEffects([UsersEffects]), 
         ]
     },
     {

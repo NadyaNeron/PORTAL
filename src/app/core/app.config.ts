@@ -23,6 +23,8 @@ import { projectsFeature } from "../state/projects/projects.reducer";
 import { UserEffects } from "../state/user/user.effects";
 import { authInterceptor } from "./providers/auth.interceptor";
 import { AuthGuard } from "./providers/auth.guard";
+import { usersFeature } from "../state/users/users.reducer";
+import { UsersEffects } from "../state/users/user.effects";
 
 registerLocaleData(ru);
 
@@ -45,8 +47,8 @@ const routes: Routes = [
           path: 'employees',
           loadChildren: () => import('../employee/routes').then((m) => m.EmployeesRoutes),
           providers: [
-            provideState(employeesFeature),
-            provideEffects(EmployeesEffects)
+            provideState(usersFeature),
+            provideEffects(UsersEffects)
           ]
         },
         {
