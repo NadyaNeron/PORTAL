@@ -1,0 +1,1387 @@
+basePath: /v1
+definitions:
+  tp.CreateClientRequest:
+    properties:
+      accountId:
+        example: dc6985a7-79bc-4be0-9408-0eb57ec46dbb
+        format: $uuid
+        type: string
+        x-order: "4"
+      name:
+        example: Alfa-Bank
+        type: string
+        x-order: "2"
+      photoUrl:
+        example: http://cloud.ds.ru/download/asiOPINalmsdIUjnlasdaIOUKnn
+        format: $uri
+        type: string
+        x-order: "3"
+    type: object
+  tp.CreateProjectRequest:
+    properties:
+      clientId:
+        example: dc6985a7-79bc-4be0-9408-0eb57ec46dbb
+        format: $uuid
+        type: string
+        x-order: "4"
+      description:
+        example: cloud management product
+        type: string
+        x-order: "3"
+      isInternal:
+        example: true
+        type: boolean
+        x-order: "7"
+      name:
+        example: Zakroma
+        type: string
+        x-order: "2"
+      projectType:
+        enum:
+        - INTEGRATION
+        - BPA
+        - SUPPORT
+        - INFRA
+        example: BPA
+        type: string
+        x-order: "6"
+      technologies:
+        example:
+        - Java
+        - RabbitMQ
+        items:
+          type: string
+        type: array
+        x-order: "5"
+    required:
+    - clientId
+    - description
+    - name
+    - projectType
+    type: object
+  tp.ErrorResponse:
+    properties:
+      code:
+        type: string
+        x-order: "1"
+      message:
+        type: string
+        x-order: "2"
+    type: object
+  tp.GetUsersBirthdaysResponse:
+    properties:
+      dateToUsers:
+        additionalProperties:
+          items:
+            $ref: '#/definitions/tp.UserBirtdhayItem'
+          type: array
+        description: Map соответствия даты рождения к сотрудникам
+        type: object
+        x-order: "1"
+    type: object
+  tp.IdName:
+    properties:
+      id:
+        description: Уникальный идентификатор
+        example: 53c501ee-fd7c-44ce-a2b2-e7c63441c960
+        maxLength: 36
+        minLength: 0
+        type: string
+        x-order: "1"
+      name:
+        description: Справочное наименование
+        example: Digital Spirit (Астрахань)
+        type: string
+        x-order: "2"
+    type: object
+  tp.ListDictionaryResponse:
+    properties:
+      items:
+        description: Список справочных значений
+        items:
+          $ref: '#/definitions/tp.IdName'
+        type: array
+        x-order: "1"
+    type: object
+  tp.ListProjectsItem:
+    properties:
+      clientName:
+        example: Alfa-Bank
+        type: string
+        x-order: "4"
+      clientPhotoUrl:
+        example: http://cloud.ds.ru/download/asiOPINalmsdIUjnlasdaIOUKnn
+        format: $uri
+        type: string
+        x-order: "5"
+      id:
+        example: dc6985a7-79bc-4be0-9408-0eb57ec46dbb
+        format: $uuid
+        type: string
+        x-order: "1"
+      name:
+        example: Zakroma
+        type: string
+        x-order: "2"
+      projectType:
+        enum:
+        - INTEGRATION
+        - BPA
+        - SUPPORT
+        - INFRA
+        example: BPA
+        type: string
+        x-order: "6"
+      technologies:
+        example:
+        - Java
+        - RabbitMQ
+        items:
+          type: string
+        type: array
+        x-order: "3"
+    required:
+    - id
+    - name
+    - projectType
+    type: object
+  tp.ListProjectsResponse:
+    properties:
+      items:
+        description: Список проектов
+        items:
+          $ref: '#/definitions/tp.ListProjectsItem'
+        type: array
+        x-order: "1"
+      totalCount:
+        description: Общее количество элементов выборки
+        format: $integer
+        type: integer
+        x-order: "2"
+    type: object
+  tp.ListTimeOffItem:
+    properties:
+      finishDate:
+        description: Дата окончания
+        example: "2045-10-01T00:00:00Z"
+        type: string
+        x-order: "3"
+      id:
+        description: Идентификатор
+        example: dc6985a7-79bc-4be0-9408-0eb57ec46dbb
+        format: $uuid
+        type: string
+        x-order: "1"
+      startDate:
+        description: Дата начала
+        example: "2009-10-01T00:00:00Z"
+        type: string
+        x-order: "2"
+      user:
+        allOf:
+        - $ref: '#/definitions/tp.ListTimeOffUser'
+        description: Сотрудник
+        x-order: "4"
+    required:
+    - id
+    type: object
+  tp.ListTimeOffUser:
+    properties:
+      id:
+        description: Идентификатор
+        type: string
+        x-order: "1"
+      name:
+        description: Имя
+        type: string
+        x-order: "2"
+      photoUrl:
+        description: Фотография
+        type: string
+        x-order: "3"
+    type: object
+  tp.ListTimeOffsResponse:
+    properties:
+      items:
+        description: Список отпусков
+        items:
+          $ref: '#/definitions/tp.ListTimeOffItem'
+        type: array
+        x-order: "1"
+      totalCount:
+        description: Общее количество отпусков
+        format: $integer
+        type: integer
+        x-order: "2"
+    type: object
+  tp.ListUsersItem:
+    properties:
+      clients:
+        description: Клиенты
+        items:
+          $ref: '#/definitions/tp.UserItemClient'
+        type: array
+        x-order: "8"
+      competences:
+        description: Компетенции
+        items:
+          $ref: '#/definitions/tp.UserCompetence'
+        type: array
+        x-order: "5"
+      email:
+        description: Почта
+        type: string
+        x-order: "6"
+      id:
+        description: Идентификатор сотруника
+        type: string
+        x-order: "1"
+      level:
+        description: Грейд
+        type: string
+        x-order: "4"
+      location:
+        description: Город проживания
+        type: string
+        x-order: "7"
+      name:
+        description: ФИО
+        type: string
+        x-order: "2"
+      photoUrl:
+        description: Ссылка на фото
+        type: string
+        x-order: "9"
+      role:
+        description: Роль
+        type: string
+        x-order: "3"
+    type: object
+  tp.ListUsersResponse:
+    properties:
+      items:
+        description: Список пользователей
+        items:
+          $ref: '#/definitions/tp.ListUsersItem'
+        type: array
+        x-order: "1"
+      totalCount:
+        description: Общее количество элементов выборки
+        format: $integer
+        type: integer
+        x-order: "2"
+    type: object
+  tp.ProjectResponse:
+    properties:
+      accountId:
+        example: dc6985a7-79bc-4be0-9408-0eb57ec46dbb
+        format: $uuid
+        type: string
+        x-order: "6"
+      accountName:
+        example: Пургина Диана
+        type: string
+        x-order: "7"
+      clientName:
+        example: Alfa-Bank
+        type: string
+        x-order: "4"
+      clientPhotoUrl:
+        example: http://cloud.ds.ru/download/asiOPINalmsdIUjnlasdaIOUKnn
+        format: $uri
+        type: string
+        x-order: "5"
+      description:
+        example: Lorem ipsum dolor sit amet
+        type: string
+        x-order: "8"
+      id:
+        example: dc6985a7-79bc-4be0-9408-0eb57ec46dbb
+        format: $uuid
+        type: string
+        x-order: "1"
+      name:
+        example: Zakroma
+        type: string
+        x-order: "2"
+      technologies:
+        example:
+        - Java
+        - RabbitMQ
+        items:
+          type: string
+        type: array
+        x-order: "3"
+    required:
+    - id
+    - name
+    type: object
+  tp.TokenRequest:
+    properties:
+      grant_type:
+        example: password
+        type: string
+        x-order: "1"
+      password:
+        example: password
+        type: string
+        x-order: "3"
+      refresh_token:
+        type: string
+        x-order: "4"
+      username:
+        example: login
+        type: string
+        x-order: "2"
+    required:
+    - grant_type
+    type: object
+  tp.TokenResponse:
+    properties:
+      access_token:
+        type: string
+        x-order: "1"
+      expires_in:
+        type: integer
+        x-order: "4"
+      refresh_token:
+        type: string
+        x-order: "2"
+      token_type:
+        type: string
+        x-order: "3"
+      user_id:
+        type: string
+        x-order: "5"
+    type: object
+  tp.UpdateClientRequest:
+    properties:
+      accountId:
+        example: dc6985a7-79bc-4be0-9408-0eb57ec46dbb
+        format: $uuid
+        type: string
+        x-order: "4"
+      id:
+        example: dc6985a7-79bc-4be0-9408-0eb57ec46dbb
+        format: $uuid
+        type: string
+        x-order: "1"
+      name:
+        example: Alfa-Bank
+        type: string
+        x-order: "2"
+      photoUrl:
+        example: http://cloud.ds.ru/download/asiOPINalmsdIUjnlasdaIOUKnn
+        format: $uri
+        type: string
+        x-order: "3"
+    type: object
+  tp.UpdateProjectRequest:
+    properties:
+      clientId:
+        example: dc6985a7-79bc-4be0-9408-0eb57ec46dbb
+        format: $uuid
+        type: string
+        x-order: "4"
+      description:
+        example: cloud management product
+        type: string
+        x-order: "3"
+      id:
+        example: dc6985a7-79bc-4be0-9408-0eb57ec46dbb
+        format: $uuid
+        type: string
+        x-order: "1"
+      isInternal:
+        example: true
+        type: boolean
+        x-order: "7"
+      name:
+        example: Zakroma
+        type: string
+        x-order: "2"
+      projectType:
+        enum:
+        - INTEGRATION
+        - BPA
+        - SUPPORT
+        - INFRA
+        example: BPA
+        type: string
+        x-order: "6"
+      technologies:
+        example:
+        - Java
+        - RabbitMQ
+        items:
+          type: string
+        type: array
+        x-order: "5"
+    required:
+    - clientId
+    - description
+    - id
+    - name
+    - projectType
+    type: object
+  tp.UserBirtdhayItem:
+    properties:
+      birthday:
+        description: День рождения
+        type: string
+        x-order: "3"
+      id:
+        description: Идентификатор сотрудника
+        type: string
+        x-order: "1"
+      name:
+        description: ФИО
+        type: string
+        x-order: "2"
+      photoUrl:
+        description: Ссылка на фото минимального разрешения
+        type: string
+        x-order: "4"
+    type: object
+  tp.UserCompetence:
+    properties:
+      isDefault:
+        description: Признак компетенции по умолчанию
+        type: boolean
+        x-order: "2"
+      name:
+        description: Наименование
+        type: string
+        x-order: "1"
+    type: object
+  tp.UserCountResponse:
+    properties:
+      count:
+        description: количество сотрудников
+        format: $integer
+        type: integer
+        x-order: "1"
+    type: object
+  tp.UserItem:
+    properties:
+      birthday:
+        description: День рождения
+        type: string
+        x-order: "3"
+      createdAt:
+        description: Дата создания
+        type: string
+        x-order: "14"
+      deletedAt:
+        description: Дата удаления
+        type: string
+        x-order: "16"
+      departmentId:
+        description: Идентификатор филиала
+        type: string
+        x-order: "9"
+      division:
+        description: Функциональное разделение
+        enum:
+        - PRODUCTION
+        - MANAGEMENT
+        - BUSINESS_SUPPORT
+        type: string
+        x-order: "10"
+      email:
+        description: Почта
+        type: string
+        x-order: "5"
+      hobbies:
+        description: Хобби
+        type: string
+        x-order: "7"
+      id:
+        description: Идентификатор сотрудника
+        type: string
+        x-order: "1"
+      locationId:
+        description: Идентификатор города проживания
+        type: string
+        x-order: "8"
+      maxPhotoUrl:
+        description: Ссылка на фото максимального разрешения
+        type: string
+        x-order: "12"
+      minPhotoUrl:
+        description: Ссылка на фото минимального разрешения
+        type: string
+        x-order: "11"
+      name:
+        description: ФИО
+        type: string
+        x-order: "2"
+      phone:
+        description: Телефон
+        type: string
+        x-order: "4"
+      position:
+        description: Позиция
+        type: string
+        x-order: "6"
+      telegram:
+        description: Телеграм
+        type: string
+        x-order: "13"
+      updatedAt:
+        description: Дата обновления
+        type: string
+        x-order: "15"
+    type: object
+  tp.UserItemClient:
+    properties:
+      id:
+        description: Идентификатор клиента
+        type: string
+        x-order: "1"
+      name:
+        description: Наименование
+        type: string
+        x-order: "5"
+      photoUrl:
+        description: Ссылка на фото
+        type: string
+        x-order: "9"
+    type: object
+  tp.UserResponse:
+    properties:
+      birthday:
+        description: День рождения
+        type: string
+        x-order: "11"
+      clients:
+        description: Клиенты
+        items:
+          $ref: '#/definitions/tp.UserItemClient'
+        type: array
+        x-order: "10"
+      competences:
+        description: Компетенции
+        items:
+          $ref: '#/definitions/tp.UserCompetence'
+        type: array
+        x-order: "5"
+      department:
+        description: Филиал
+        type: string
+        x-order: "13"
+      division:
+        description: Функциональное разделение
+        enum:
+        - PRODUCTION
+        - MANAGEMENT
+        - BUSINESS_SUPPORT
+        type: string
+        x-order: "14"
+      email:
+        description: Почта
+        type: string
+        x-order: "6"
+      hobby:
+        description: Хобби
+        type: string
+        x-order: "8"
+      id:
+        description: Идентификатор сотруника
+        type: string
+        x-order: "1"
+      location:
+        description: Город проживания
+        type: string
+        x-order: "12"
+      name:
+        description: ФИО
+        type: string
+        x-order: "2"
+      phone:
+        description: Телефон
+        type: string
+        x-order: "4"
+      photoUrl:
+        description: Ссылка на фото
+        type: string
+        x-order: "9"
+      role:
+        description: Направление
+        type: string
+        x-order: "3"
+      telegram:
+        description: Телеграм
+        type: string
+        x-order: "7"
+    type: object
+  tp.UsersResponse:
+    properties:
+      items:
+        description: Список всех пользователей
+        items:
+          $ref: '#/definitions/tp.UserItem'
+        type: array
+        x-order: "1"
+    type: object
+host: localhost:7072
+info:
+  contact: {}
+  title: DS Portal REST API
+  version: "1.0"
+paths:
+  /admin/reload:
+    get:
+      operationId: admin-reload
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: некорректный запрос
+          schema:
+            $ref: '#/definitions/tp.ErrorResponse'
+        "401":
+          description: токен просрочен или невалиден
+          schema:
+            $ref: '#/definitions/tp.ErrorResponse'
+        "403":
+          description: нет доступа для вполнения операции
+          schema:
+            $ref: '#/definitions/tp.ErrorResponse'
+        "500":
+          description: обратитесь в поддержку
+          schema:
+            $ref: '#/definitions/tp.ErrorResponse'
+      security:
+      - AccessToken: []
+      summary: Перезагрузить данные
+      tags:
+      - admin
+  /clients:
+    post:
+      consumes:
+      - application/json
+      description: Создание нового клиента
+      operationId: create-client
+      parameters:
+      - description: Новый клиент
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/tp.CreateClientRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+        "400":
+          description: некорректный запрос
+          schema:
+            $ref: '#/definitions/tp.ErrorResponse'
+        "401":
+          description: токен просрочен или невалиден
+          schema:
+            $ref: '#/definitions/tp.ErrorResponse'
+        "403":
+          description: нет доступа для вполнения операции
+          schema:
+            $ref: '#/definitions/tp.ErrorResponse'
+        "500":
+          description: обратитесь в поддержку
+          schema:
+            $ref: '#/definitions/tp.ErrorResponse'
+      security:
+      - AccessToken: []
+      summary: Создать клиента
+      tags:
+      - clients
+    put:
+      consumes:
+      - application/json
+      description: Обновление сущаствующего клиента
+      operationId: create-client
+      parameters:
+      - description: Обновленный клиент
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/tp.UpdateClientRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+        "400":
+          description: некорректный запрос
+          schema:
+            $ref: '#/definitions/tp.ErrorResponse'
+        "401":
+          description: токен просрочен или невалиден
+          schema:
+            $ref: '#/definitions/tp.ErrorResponse'
+        "403":
+          description: нет доступа для вполнения операции
+          schema:
+            $ref: '#/definitions/tp.ErrorResponse'
+        "500":
+          description: обратитесь в поддержку
+          schema:
+            $ref: '#/definitions/tp.ErrorResponse'
+      security:
+      - AccessToken: []
+      summary: ОБновить клиента
+      tags:
+      - clients
+  /dictionary:
+    get:
+      consumes:
+      - application/json
+      description: Получение значений справочника при указании уникального ключа справочника
+      operationId: list-dictionary
+      parameters:
+      - description: уникальный идентификатор справочника
+        enum:
+        - LEVEL
+        - COMPETENCE
+        - DIRECTION
+        - DEPARTMENT
+        - CLIENTS
+        - TECHNOLOGY
+        - LOCATION
+        in: query
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/tp.ListDictionaryResponse'
+        "400":
+          description: некорректный запрос
+          schema:
+            $ref: '#/definitions/tp.ErrorResponse'
+        "401":
+          description: токен просрочен или невалиден
+          schema:
+            $ref: '#/definitions/tp.ErrorResponse'
+        "403":
+          description: нет доступа для вполнения операции
+          schema:
+            $ref: '#/definitions/tp.ErrorResponse'
+        "500":
+          description: обратитесь в поддержку
+          schema:
+            $ref: '#/definitions/tp.ErrorResponse'
+      security:
+      - AccessToken: []
+      summary: Получить справочник
+      tags:
+      - dictionary
+  /outbounds/users:
+    get:
+      consumes:
+      - application/json
+      description: Получение списка всех сотрудников
+      operationId: get-users
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/tp.UsersResponse'
+        "400":
+          description: некорректный запрос
+          schema:
+            $ref: '#/definitions/tp.ErrorResponse'
+        "401":
+          description: токен просрочен или невалиден
+          schema:
+            $ref: '#/definitions/tp.ErrorResponse'
+        "403":
+          description: нет доступа для вполнения операции
+          schema:
+            $ref: '#/definitions/tp.ErrorResponse'
+        "500":
+          description: обратитесь в поддержку
+          schema:
+            $ref: '#/definitions/tp.ErrorResponse'
+      security:
+      - AccessToken: []
+      summary: Получить список всех сотрудников
+      tags:
+      - outbounds
+  /projects:
+    get:
+      consumes:
+      - application/json
+      description: Получение списка проектов
+      operationId: list-projects
+      parameters:
+      - description: Строка для поиска в свободном формате
+        example: Иван
+        in: query
+        name: searchStr
+        type: string
+        x-order: "1"
+      - description: Количество элементов выборки
+        example: 20
+        format: $integer
+        in: query
+        maximum: 5000
+        minimum: 0
+        name: count
+        required: true
+        type: integer
+        x-order: "100"
+      - description: Заказная или Собственная?
+        example: true
+        in: query
+        name: isInternal
+        type: boolean
+        x-order: "2"
+      - description: Тип проекта
+        enum:
+        - INTEGRATION
+        - BPA
+        - SUPPORT
+        - INFRA
+        example: BPA
+        in: query
+        name: projectType
+        type: string
+        x-order: "3"
+      - description: Идентификатор клиента
+        example: dc6985a7-79bc-4be0-9408-0eb57ec46dbb
+        in: query
+        name: clientId
+        type: string
+        x-order: "4"
+      - collectionFormat: csv
+        description: Технологии
+        example:
+        - Java
+        - RabbitMQ
+        in: query
+        items:
+          type: string
+        name: technologies
+        type: array
+        x-order: "5"
+      - description: Смещение
+        example: 0
+        format: $integer
+        in: query
+        minimum: 0
+        name: offset
+        required: true
+        type: integer
+        x-order: "99"
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/tp.ListProjectsResponse'
+        "400":
+          description: некорректный запрос
+          schema:
+            $ref: '#/definitions/tp.ErrorResponse'
+        "401":
+          description: токен просрочен или невалиден
+          schema:
+            $ref: '#/definitions/tp.ErrorResponse'
+        "403":
+          description: нет доступа для вполнения операции
+          schema:
+            $ref: '#/definitions/tp.ErrorResponse'
+        "500":
+          description: обратитесь в поддержку
+          schema:
+            $ref: '#/definitions/tp.ErrorResponse'
+      security:
+      - AccessToken: []
+      summary: Получить список проектов
+      tags:
+      - projects
+    post:
+      consumes:
+      - application/json
+      description: Создание нового проекта
+      operationId: create-project
+      parameters:
+      - description: Новый проект
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/tp.CreateProjectRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+        "400":
+          description: некорректный запрос
+          schema:
+            $ref: '#/definitions/tp.ErrorResponse'
+        "401":
+          description: токен просрочен или невалиден
+          schema:
+            $ref: '#/definitions/tp.ErrorResponse'
+        "403":
+          description: нет доступа для вполнения операции
+          schema:
+            $ref: '#/definitions/tp.ErrorResponse'
+        "500":
+          description: обратитесь в поддержку
+          schema:
+            $ref: '#/definitions/tp.ErrorResponse'
+      security:
+      - AccessToken: []
+      summary: Создать проект
+      tags:
+      - projects
+    put:
+      consumes:
+      - application/json
+      description: Обновление проекта
+      operationId: update-project
+      parameters:
+      - description: Обновленный проект
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/tp.UpdateProjectRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+        "400":
+          description: некорректный запрос
+          schema:
+            $ref: '#/definitions/tp.ErrorResponse'
+        "401":
+          description: токен просрочен или невалиден
+          schema:
+            $ref: '#/definitions/tp.ErrorResponse'
+        "403":
+          description: нет доступа для вполнения операции
+          schema:
+            $ref: '#/definitions/tp.ErrorResponse'
+        "500":
+          description: обратитесь в поддержку
+          schema:
+            $ref: '#/definitions/tp.ErrorResponse'
+      security:
+      - AccessToken: []
+      summary: Обновить проект
+      tags:
+      - projects
+  /projects/{id}:
+    get:
+      consumes:
+      - application/json
+      description: Получение карточки проекта по идентификатору
+      operationId: get-project
+      parameters:
+      - description: идентификатор
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/tp.ProjectResponse'
+        "400":
+          description: некорректный запрос
+          schema:
+            $ref: '#/definitions/tp.ErrorResponse'
+        "401":
+          description: токен просрочен или невалиден
+          schema:
+            $ref: '#/definitions/tp.ErrorResponse'
+        "403":
+          description: нет доступа для вполнения операции
+          schema:
+            $ref: '#/definitions/tp.ErrorResponse'
+        "500":
+          description: обратитесь в поддержку
+          schema:
+            $ref: '#/definitions/tp.ErrorResponse'
+      security:
+      - AccessToken: []
+      summary: Получить карточку проекта
+      tags:
+      - projects
+  /time-offs:
+    get:
+      consumes:
+      - application/json
+      description: Получение списка отпусов
+      operationId: list-timeoffs
+      parameters:
+      - description: Дата начала периода
+        example: "2009-10-01T00:00:00Z"
+        in: query
+        name: from
+        required: true
+        type: string
+        x-order: "1"
+      - description: Дата окончания периода
+        example: "2045-10-01T00:00:00Z"
+        in: query
+        name: to
+        required: true
+        type: string
+        x-order: "2"
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/tp.ListTimeOffsResponse'
+        "400":
+          description: некорректный запрос
+          schema:
+            $ref: '#/definitions/tp.ErrorResponse'
+        "401":
+          description: токен просрочен или невалиден
+          schema:
+            $ref: '#/definitions/tp.ErrorResponse'
+        "403":
+          description: нет доступа для вполнения операции
+          schema:
+            $ref: '#/definitions/tp.ErrorResponse'
+        "500":
+          description: обратитесь в поддержку
+          schema:
+            $ref: '#/definitions/tp.ErrorResponse'
+      security:
+      - AccessToken: []
+      summary: Получить список отпусков
+      tags:
+      - timeoffs
+  /token:
+    post:
+      consumes:
+      - application/json
+      operationId: token
+      parameters:
+      - description: Запрос токена
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/tp.TokenRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/tp.TokenResponse'
+        "400":
+          description: некорректный запрос
+          schema:
+            $ref: '#/definitions/tp.ErrorResponse'
+        "401":
+          description: токен просрочен или невалиден
+          schema:
+            $ref: '#/definitions/tp.ErrorResponse'
+        "403":
+          description: нет доступа для вполнения операции
+          schema:
+            $ref: '#/definitions/tp.ErrorResponse'
+        "500":
+          description: обратитесь в поддержку
+          schema:
+            $ref: '#/definitions/tp.ErrorResponse'
+      summary: Получить/Обновить Токен
+      tags:
+      - auth
+  /users:
+    get:
+      consumes:
+      - application/json
+      description: Получение списка сотрудников по фильтру
+      operationId: list-users
+      parameters:
+      - description: Строка для поиска в свободном формате
+        example: Иван
+        in: query
+        name: searchStr
+        type: string
+        x-order: "1"
+      - description: Количество элементов выборки
+        example: 20
+        format: $integer
+        in: query
+        maximum: 5000
+        minimum: 0
+        name: count
+        required: true
+        type: integer
+        x-order: "10"
+      - collectionFormat: csv
+        description: Грейды
+        example:
+        - Junior
+        - Middle
+        in: query
+        items:
+          type: string
+        name: level
+        type: array
+        x-order: "2"
+      - collectionFormat: csv
+        description: Направления
+        example:
+        - Analyst
+        - Developer
+        in: query
+        items:
+          type: string
+        name: role
+        type: array
+        x-order: "3"
+      - collectionFormat: csv
+        description: Компетенции
+        example:
+        - Golang
+        - Java
+        in: query
+        items:
+          type: string
+        name: competences
+        type: array
+        x-order: "4"
+      - collectionFormat: csv
+        description: Филиалы
+        example:
+        - dc6985a7-79bc-4be0-9408-0eb57ec46dbb
+        - d800d976-cb20-407b-beb1-15c98c7abc54
+        in: query
+        items:
+          type: string
+        name: department
+        type: array
+        x-order: "5"
+      - collectionFormat: csv
+        description: Место дислокации сотрудников
+        example:
+        - c756b34d-33cd-49aa-b694-e4fbe6e6766f
+        - bff9f46e-6b4f-495f-91a1-5e3c22e0cb5a
+        in: query
+        items:
+          type: string
+        name: location
+        type: array
+        x-order: "6"
+      - collectionFormat: csv
+        description: Клиенты
+        example:
+        - Java
+        - Golang
+        in: query
+        items:
+          type: string
+        name: clients
+        type: array
+        x-order: "7"
+      - description: Функциональное разделение
+        enum:
+        - PRODUCTION
+        - MANAGEMENT
+        - BUSINESS_SUPPORT
+        example: PRODUCTION
+        in: query
+        name: division
+        required: true
+        type: string
+        x-order: "8"
+      - description: Смещение
+        example: 0
+        format: $integer
+        in: query
+        minimum: 0
+        name: offset
+        required: true
+        type: integer
+        x-order: "9"
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/tp.ListUsersResponse'
+        "400":
+          description: некорректный запрос
+          schema:
+            $ref: '#/definitions/tp.ErrorResponse'
+        "401":
+          description: токен просрочен или невалиден
+          schema:
+            $ref: '#/definitions/tp.ErrorResponse'
+        "403":
+          description: нет доступа для вполнения операции
+          schema:
+            $ref: '#/definitions/tp.ErrorResponse'
+        "500":
+          description: обратитесь в поддержку
+          schema:
+            $ref: '#/definitions/tp.ErrorResponse'
+      security:
+      - AccessToken: []
+      summary: Получить список сотрудников
+      tags:
+      - users
+  /users/{id}:
+    get:
+      consumes:
+      - application/json
+      description: Получение карточки сотрудника по идентификатору
+      operationId: get-user
+      parameters:
+      - description: идентификатор
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/tp.UserResponse'
+        "400":
+          description: некорректный запрос
+          schema:
+            $ref: '#/definitions/tp.ErrorResponse'
+        "401":
+          description: токен просрочен или невалиден
+          schema:
+            $ref: '#/definitions/tp.ErrorResponse'
+        "403":
+          description: нет доступа для вполнения операции
+          schema:
+            $ref: '#/definitions/tp.ErrorResponse'
+        "500":
+          description: обратитесь в поддержку
+          schema:
+            $ref: '#/definitions/tp.ErrorResponse'
+      security:
+      - AccessToken: []
+      summary: Получить карточку сотрудника
+      tags:
+      - users
+  /users/birthdays:
+    get:
+      consumes:
+      - application/json
+      description: Получение дат рождения сотрудников по диапазону
+      operationId: get-users-birthdays
+      parameters:
+      - description: Месяц начала периода
+        in: query
+        name: startMonth
+        type: integer
+        x-order: "1"
+      - description: Месяц окончания периода
+        in: query
+        name: endMonth
+        type: integer
+        x-order: "2"
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/tp.GetUsersBirthdaysResponse'
+        "400":
+          description: некорректный запрос
+          schema:
+            $ref: '#/definitions/tp.ErrorResponse'
+        "401":
+          description: токен просрочен или невалиден
+          schema:
+            $ref: '#/definitions/tp.ErrorResponse'
+        "403":
+          description: нет доступа для вполнения операции
+          schema:
+            $ref: '#/definitions/tp.ErrorResponse'
+        "500":
+          description: обратитесь в поддержку
+          schema:
+            $ref: '#/definitions/tp.ErrorResponse'
+      security:
+      - AccessToken: []
+      summary: Получить дни рождения сотрудников
+      tags:
+      - users
+  /users/count:
+    get:
+      consumes:
+      - application/json
+      description: Получение счётчика сотрудников
+      operationId: count-users
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/tp.UserCountResponse'
+        "400":
+          description: некорректный запрос
+          schema:
+            $ref: '#/definitions/tp.ErrorResponse'
+        "401":
+          description: токен просрочен или невалиден
+          schema:
+            $ref: '#/definitions/tp.ErrorResponse'
+        "403":
+          description: нет доступа для вполнения операции
+          schema:
+            $ref: '#/definitions/tp.ErrorResponse'
+        "500":
+          description: обратитесь в поддержку
+          schema:
+            $ref: '#/definitions/tp.ErrorResponse'
+      security:
+      - AccessToken: []
+      summary: Получить счётчик сотрудников
+      tags:
+      - users
+schemes:
+- http
+securityDefinitions:
+  AccessToken:
+    in: header
+    name: authorization
+    type: apiKey
+swagger: "2.0"

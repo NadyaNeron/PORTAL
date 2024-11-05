@@ -1,0 +1,8 @@
+{
+    "/v1": {
+      "target": "https://portalapi.yc.digital-spirit.ru",
+      "secure": false,
+      "changeOrigin": true,
+      "logLevel": "debug"
+    }
+  }

@@ -8,7 +8,9 @@ import { Store } from "@ngrx/store";
     providedIn:"root"
   })
 export class ConfigService {
-    constructor(private http: HttpClient, private store: Store){
+    private store = inject(Store)
+    private http = inject(HttpClient)
+    constructor(){
         this.load().subscribe((data: Config) => {
             this.store.dispatch(AppActions.load(data))
           })

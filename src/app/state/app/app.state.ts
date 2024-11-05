@@ -14,11 +14,12 @@ export interface AppState {
 
 export const initialState:AppState = {
     config:{
-        apiUrl:""
+        apiUrl:"",
+        refreshTokenInterval:undefined
     }
 }
   
 export const appReducer = createReducer(
     initialState,
-    on(AppActions.load, (state, config ) => ( {...state, config:{apiUrl:config.apiUrl}}))
+    on(AppActions.load, (state, config ) => ( {...state, config:{apiUrl:config.apiUrl, refreshTokenInterval:config.refreshTokenInterval}}))
 );

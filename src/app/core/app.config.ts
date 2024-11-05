@@ -11,7 +11,7 @@ import { registerLocaleData } from '@angular/common';
 import ru from '@angular/common/locales/ru';
 import { FormsModule } from '@angular/forms';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { AuthPageComponent } from '../auth/auth-page/auth.page.component';
 import { LayoutComponent } from "../layout/layout.component";
 import { EmployeesEffects } from "../state/employees/employees.effects";
@@ -20,6 +20,8 @@ import { AppInitializerProvider } from "./providers/app-initializer";
 import { appReducer } from "../state/app/app.state";
 import { ProjectsEffects } from "../state/projects/projects.effects";
 import { projectsFeature } from "../state/projects/projects.reducer";
+import { UserEffects } from "../state/user/user.effects";
+import { authInterceptor } from "./providers/auth.interceptor";
 
 registerLocaleData(ru);
 
@@ -27,7 +29,10 @@ const routes: Routes = [
     { path: '',   redirectTo: 'auth', pathMatch: 'full' },
     { 
         path: 'auth', 
-        component: AuthPageComponent
+        component: AuthPageComponent,
+        providers: [
+          provideEffects(UserEffects)
+        ]
     },
     {
       path:'app',
@@ -71,7 +76,9 @@ export const appConfig: ApplicationConfig = {
     provideNzI18n(ru_RU),
     importProvidersFrom(FormsModule),
     provideAnimationsAsync(),
-    provideHttpClient(),
+    provideHttpClient(
+      withInterceptors([authInterceptor])
+    ),
     NG_EVENT_PLUGINS,
   ]
 };

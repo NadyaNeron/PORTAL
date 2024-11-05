@@ -1,3 +1,4 @@
 export interface Config {
-    apiUrl:string
+    apiUrl:string,
+    refreshTokenInterval:undefined|number
 }

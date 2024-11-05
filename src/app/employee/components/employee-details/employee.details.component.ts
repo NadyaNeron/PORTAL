@@ -1,4 +1,4 @@
-import { Component, computed, signal } from '@angular/core';
+import { Component, computed } from '@angular/core';
 import { TuiAppearance, TuiTitle } from '@taiga-ui/core';
 import { TuiCardLarge, TuiHeader } from '@taiga-ui/layout';
 import { EmployeeFormComponent } from "../employee-form/employee.form.component";
@@ -22,17 +22,6 @@ import { EmployeeFullPartial } from '../../types/employee.full.';
   styles: ``
 })
 export class EmployeeDetailsComponent {
-  // public employeeInput = signal(
-  //   {
-  //     id:"1",
-  //     fio: "Иванов Иван Иванович",
-  //     email: "ivanov@mail.ru",
-  //     phone:"+79809009090",
-  //     position:"Менеджер",
-  //     login:"ivanov"
-  //   }
-  // );
-
   public employee = this.store.selectSignal<EmployeeFullPartial>(employeeFeature.selectEmployee)
 
   public employeeInput = computed(() =>{

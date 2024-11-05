@@ -1,12 +1,8 @@
-import { Component, OnInit, Signal, inject, input } from '@angular/core';
+import { Component } from '@angular/core';
 import { EmployeeCardComponent } from "../employee-card/employee.card.component";
 import {TuiRepeatTimes} from '@taiga-ui/cdk';
-import { EmployeesService } from 'src/app/state/employees/employees.service';
-import { EmployeeShort } from '../../types/employee.short';
-import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
-import { EmployeesState, employeesFeature } from 'src/app/state/employees/employees.reducer';
-import { EmployeesPageActions } from 'src/app/state/employees/employees.actions';
+import { employeesFeature } from 'src/app/state/employees/employees.reducer';
 import { CommonModule } from '@angular/common';
 
 @Component({
