@@ -21,15 +21,7 @@ import { EmployeesPageActions } from 'src/app/state/employees/employees.actions'
   `,
   styleUrl: `./employees.page.component.scss`
 })
-export class EmployeesPageComponent implements OnInit{
+export class EmployeesPageComponent{
 
   constructor(private store: Store) {}
-
-  ngOnInit(): void {
-    this.loadEmployees();
-  }
-
-  loadEmployees(): void {
-    this.store.dispatch(EmployeesPageActions.load());
-  }
 }

@@ -15,19 +15,8 @@ export interface UserState {
 export const initialState:UserState = {
     user: {
         "birthday": "",
-        "clients": [
-            {
-            "id": "",
-            "name": "",
-            "photoUrl": ""
-            }
-        ],
-        "competences": [
-            {
-            "isDefault": true,
-            "name": ""
-            }
-        ],
+        "clients": [],
+        "competences": [],
         "department": "",
         "division": "PRODUCTION",
         "email": "",
@@ -47,11 +36,7 @@ export const initialState:UserState = {
 
 export const userReducer = createReducer(
     initialState, 
-    on(UserActions.get, (state) => {
-        console.log("get")
-        return({...state, loading:true})}),
-    on(UserActions.success, (state, {user}) => {
-        console.log(user)
-        return ({...state, user, loading:false, isSucces:true})}),
+    on(UserActions.get, (state) => ({...state, loading:true})),
+    on(UserActions.success, (state, {user}) => ({...state, user, loading:false, isSucces:true})),
     on(UserActions.error, (state, {error}) => ({...state, error, loading:false, isSucces:false}))
 )

@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import {TuiAppBar} from '@taiga-ui/layout';
 import { FormsModule } from '@angular/forms';
 import { RouterLinkActive, RouterModule } from '@angular/router';
@@ -7,6 +7,9 @@ import {TuiButton, TuiLink, TuiPopup, TuiScrollbar, TuiTitle} from '@taiga-ui/co
 import {TuiAvatar, TuiBadge, TuiDrawer, TuiTabs} from '@taiga-ui/kit';
 import {TuiHeader, TuiNavigation} from '@taiga-ui/layout';
 import { TuiRepeatTimes } from '@taiga-ui/cdk';
+import { Store } from '@ngrx/store';
+import { currentUserSelector } from '../state/app/app.selector';
+import { AuthService } from '../core/services/auth.service';
 @Component({
   selector: 'app-layout',
   standalone: true,
@@ -70,6 +73,17 @@ import { TuiRepeatTimes } from '@taiga-ui/cdk';
                     >
                         Проекты
                     </a>
+                    <a
+                        [routerLink]="['/auth']"  
+                        tuiLink 
+                        class="sidebar-item"  
+                        style="margin-top:auto; color:red"
+                        routerLinkActive="active" 
+                        ariaCurrentWhenActive="page"
+                        (click)="onExit()"
+                    >
+                        Выйти
+                    </a>
                 </div>
             </tui-drawer>
             <label tuiTitle="l" style="color:var(--primary-color)">
@@ -81,7 +95,7 @@ import { TuiRepeatTimes } from '@taiga-ui/cdk';
                 type="button"
                 class="login-btn"
             >
-                login
+                {{user()?.name}}
                 <tui-avatar src="AI" />
             </button>
         </tui-app-bar>
@@ -96,9 +110,17 @@ import { TuiRepeatTimes } from '@taiga-ui/cdk';
 })
 export class LayoutComponent {
     protected open = signal(false);
+    private store = inject(Store)
+    protected user = this.store.selectSignal(currentUserSelector)
+    private authService = inject(AuthService)
 
     public onClose(): void {
         this.open.set(false);
+    }
+
+    public onExit(): void {
+        this.open.set(false)
+        this.authService.logout()
     }
 
     public toggleSidebarState(){

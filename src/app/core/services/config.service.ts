@@ -11,8 +11,8 @@ export class ConfigService {
     private store = inject(Store)
     private http = inject(HttpClient)
     constructor(){
-        this.load().subscribe((data: Config) => {
-            this.store.dispatch(AppActions.load(data))
+        this.load().subscribe((config: Config) => {
+            this.store.dispatch(AppActions.load({ config }))
           })
     }
 

@@ -22,11 +22,11 @@ import { ProjectsEffects } from "../state/projects/projects.effects";
 import { projectsFeature } from "../state/projects/projects.reducer";
 import { UserEffects } from "../state/user/user.effects";
 import { authInterceptor } from "./providers/auth.interceptor";
+import { AuthGuard } from "./providers/auth.guard";
 
 registerLocaleData(ru);
 
 const routes: Routes = [
-    { path: '',   redirectTo: 'auth', pathMatch: 'full' },
     { 
         path: 'auth', 
         component: AuthPageComponent,
@@ -34,10 +34,13 @@ const routes: Routes = [
           provideEffects(UserEffects)
         ]
     },
+    { path: '',   redirectTo: 'app', pathMatch: 'full' },
     {
       path:'app',
       component: LayoutComponent,
+      canActivate: [AuthGuard],
       children: [
+        { path: '',   redirectTo: 'employees', pathMatch: 'full' },
         { 
           path: 'employees',
           loadChildren: () => import('../employee/routes').then((m) => m.EmployeesRoutes),
@@ -56,10 +59,12 @@ const routes: Routes = [
         }
       ]
     },
+    { path: '**', redirectTo: "app", pathMatch: "full" }
 ];
 
 export const appConfig: ApplicationConfig = {
   providers: [
+    AuthGuard,
     provideAnimations(),
     provideRouter(routes),
     provideProtractorTestingSupport(),

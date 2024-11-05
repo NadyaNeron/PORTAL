@@ -1,17 +1,17 @@
 export interface User {
     "birthday": string,
     "clients": [
-        {
-        "id": string,
-        "name": string,
-        "photoUrl": string
-        }
+        // {
+        // "id": string,
+        // "name": string,
+        // "photoUrl": string
+        // }
     ],
     "competences": [
-        {
-        "isDefault": boolean,
-        "name": string
-        }
+        // {
+        // "isDefault": boolean,
+        // "name": string
+        // }
     ],
     "department": string,
     "division": string,

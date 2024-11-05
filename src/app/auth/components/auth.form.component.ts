@@ -16,10 +16,11 @@ import {TuiInputModule} from '@taiga-ui/legacy';
                 
             />
         </tui-input> 
-        <tui-input class="auth-input" formControlName="password">
+        <tui-input  class="auth-input" formControlName="password">
             Пароль
             <input
                 tuiTextfieldLegacy
+                type="password"
                 placeholder="Введите свой пароль"
                 
             />

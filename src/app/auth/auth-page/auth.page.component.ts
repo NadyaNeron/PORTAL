@@ -42,10 +42,6 @@ export class AuthPageComponent {
 
   public auth = () => {
     console.log(this.authInput())
-    this.authService.auth(this.authInput()).subscribe((data:AuthResponse) => {
-      const userId = data.user_id
-      this.store.dispatch(UserActions.get({ userId }))
-    })
-    // this.router.navigate(["../app/employees"], {relativeTo: this.route})
+    this.authService.auth(this.authInput()).subscribe((res) => this.router.navigate(["../app/employees"], {relativeTo: this.route}))
   }
 }

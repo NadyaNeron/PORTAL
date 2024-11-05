@@ -4,7 +4,9 @@ import { Store } from "@ngrx/store";
 import { Observable, Subject, defer, filter, first, interval, mergeMap, of, takeUntil, tap } from "rxjs";
 import { EmployeeFull } from "src/app/employee/types/employee.full.";
 import { ACCESS_TOKEN, REFRESH_TOKEN } from "src/app/shared/consts/localstorage";
+import { User } from "src/app/shared/types/user";
 import { apiUrSelector, refreshTokenIntervalSelector } from "src/app/state/app/app.selector";
+import { AppActions } from "src/app/state/app/app.state";
 export type AuthResponse = {
     access_token:string,
     refresh_token:string,
@@ -20,7 +22,7 @@ export class AuthService {
     private http = inject(HttpClient)
     private store = inject(Store)
     private apiUrl = this.store.selectSignal(apiUrSelector)
-    public stopRefreshCycle = new Subject()
+    public stopRefreshCycle = new Subject<void>()
 
 
     auth(body:any){
@@ -33,19 +35,28 @@ export class AuthService {
                 localStorage.setItem(ACCESS_TOKEN, res.access_token)
                 localStorage.setItem(REFRESH_TOKEN, res.refresh_token)
                 this.refreshCycle()
+            }),
+            mergeMap((res) => this.getCurrentUser(res.user_id))
+        )
+    }
+
+    getCurrentUser(userId: string): Observable<User> {
+        // TODO по итогу должны в appStore положить модель текущего пользователя (через action)
+        return this.http.get<User>(`${this.apiUrl()}/users/${userId}`).pipe(
+            tap(currentUser => {
+                console.log(currentUser)
+                this.store.dispatch(AppActions.setCurrentUser({ currentUser }))
             })
         )
     }
 
-    // getCurrentUser(userId: string): Observable<EmployeeFull> {
-    //     this.http.post<EmployeeFull>()
-    //     // TODO по итогу должны в appStore положить модель текущего пользователя (через action)
-    //     return of(null as any);
-    // }
-
-    // logout(): void {
-    //     // TODO пофантазировать
-    // }
+    logout(): void {
+        // TODO пофантазировать
+        this.store.dispatch(AppActions.resetCurrentUser())
+        this.stopRefreshCycle.next();
+        localStorage.removeItem(ACCESS_TOKEN);
+        localStorage.removeItem(REFRESH_TOKEN);
+    }
 
 
     refreshCycle(){
@@ -55,15 +66,13 @@ export class AuthService {
             }),
             filter(res => !!res),
             first(),
+            mergeMap(res => interval(res)),
+            mergeMap(() => this.refresh()),
             takeUntil(this.stopRefreshCycle),
-            mergeMap(res => interval(res).pipe(
-                mergeMap(() => this.refresh())
-            ))
         ).subscribe()
     }
 
     refresh(){
-        console.log("refresh")
         return defer(() => {
             const refreshToken = localStorage.getItem(REFRESH_TOKEN);
             if (!refreshToken) {
