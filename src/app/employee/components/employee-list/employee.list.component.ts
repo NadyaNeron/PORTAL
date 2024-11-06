@@ -1,25 +1,24 @@
 import { Component } from '@angular/core';
 import { EmployeeCardComponent } from "../employee-card/employee.card.component";
-import {TuiRepeatTimes} from '@taiga-ui/cdk';
 import { Store } from '@ngrx/store';
-import { employeesFeature } from 'src/app/state/employees/employees.reducer';
 import { CommonModule } from '@angular/common';
 import { usersFeature } from 'src/app/state/users/users.reducer';
+import { AsyncForDirective } from 'src/app/shared/components/async-for.directive';
 
 @Component({
   selector: 'app-employee-list',
   standalone: true,
-  imports: [EmployeeCardComponent, TuiRepeatTimes, CommonModule],
+  imports: [EmployeeCardComponent, CommonModule, AsyncForDirective],
   template: `
     <section class="container">
-      @for(employee of employees(); track employee.id; let idx = $index) {
-          <app-employee-card
-            [employee]="employee"
-          >
-          </app-employee-card>
-        }@empty {
+        <app-employee-card
+        *appAsyncFor="let employee of employees(); let i = index"
+          [employee]="employee"
+        >
+        </app-employee-card>
+        <!-- }@empty {
           Тут пока пусто
-        }
+        } -->
     </section>
   `,
   styles: ``

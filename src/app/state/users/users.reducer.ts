@@ -17,7 +17,7 @@ export const initialState: UsersState = {
 export const usersReducer = createReducer(
     initialState,
     on(UsersPageActions.load, (state) => ({...state, loading: true})),
-    on(UsersActions.success, (state, { users }) => ({...state, users: new Array(50).fill(users).flat(), loading: false, isSuccess:true})),
+    on(UsersActions.success, (state, { users }) => ({...state, users: new Array(10).fill(users).flat(), loading: false, isSuccess:true})),
     on(UsersActions.error, (state, { error }) => ({...state, error, loading:false, isSuccess:false}))
 )
 export const usersFeature = createFeature({
