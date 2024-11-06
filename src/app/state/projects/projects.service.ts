@@ -13,6 +13,6 @@ export class ProjectService {
     private http = inject(HttpClient)
 
     getProjects(){
-        return this.http.get<Project[]>(`${this.apiUrl()}/projects`)
+        return this.http.get<{ items: Project[], totalCount:number }>(`${this.apiUrl()}/projects?count=50&offset=0`)
     }
 }

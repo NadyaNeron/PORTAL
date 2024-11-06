@@ -1,4 +1,4 @@
-import { Component, computed, input } from '@angular/core';
+import { Component, input } from '@angular/core';
 import { TuiAppearance, TuiTitle } from '@taiga-ui/core';
 import { TuiCardLarge, TuiHeader } from '@taiga-ui/layout';
 
@@ -13,7 +13,7 @@ import { TuiCardLarge, TuiHeader } from '@taiga-ui/layout';
           tuiHeader
           class="card"
       >
-        <div class="image" [style]="this.style()"></div>
+        <ng-content/>
         <h2 tuiTitle>
             {{title()}}
             <span tuiSubtitle>{{subTitle()}}</span>
@@ -25,12 +25,5 @@ import { TuiCardLarge, TuiHeader } from '@taiga-ui/layout';
 export class CardComponent {
   public title = input<string|undefined>()
   public subTitle = input<string|undefined>()
-  public imageUrl = input<string|undefined>()
-  protected style = computed(() => {
-    if(this.imageUrl() !== "") return `background: url(${this.imageUrl()}) no-repeat`
-    return ""
-  })
-  constructor(){
-
-  }
+  constructor(){}
 }

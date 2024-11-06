@@ -14,7 +14,7 @@ export class ProjectsEffects {
       ofType(ProjectsPageActions.load),
       switchMap(() =>
         this.projectsService.getProjects().pipe(
-          map((projects) => ProjectsActions.success({ projects })),
+          map((res) => ProjectsActions.success({ projects:res.items })),
           catchError((error) =>
             of(ProjectsActions.error({ error: error.message }))
           )

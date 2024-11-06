@@ -16,7 +16,7 @@ import { TuiAppearance } from '@taiga-ui/core';
     >
       <h2 tuiTitle>
           {{project()?.name}}
-          <span tuiSubtitle>{{project()?.description}}</span>
+          <span tuiSubtitle>{{project()?.clientName}}</span>
       </h2>
     </div>
   `,
