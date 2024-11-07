@@ -10,6 +10,7 @@ import { usersFeature } from "../state/users/users.reducer";
 import { UsersEffects } from "../state/users/user.effects";
 import { userFeature } from "../state/user/user.reducer";
 import { UserEffects } from "../state/user/user.effects";
+import { EmployeeResolver } from "../core/providers/employee.resolver";
 
 export const EmployeesRoutes:Route[] = [
     {
@@ -26,6 +27,9 @@ export const EmployeesRoutes:Route[] = [
         providers: [
             provideState(userFeature),
             provideEffects([UserEffects])
-        ]
+        ],
+        resolve: {
+            employee: EmployeeResolver
+        }
     }
 ]

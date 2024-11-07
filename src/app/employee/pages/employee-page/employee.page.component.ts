@@ -41,13 +41,12 @@ export class EmployeePageComponent implements OnInit{
 
   ngOnInit(): void {
 
-    this.route.params
+    this.route.data
     .pipe(
       tuiTakeUntilDestroyed(this.destroyRef)
     )
-    .subscribe((params)=> {
-      const userId = params['id']
-      this.store.dispatch(UserPageActions.load({ userId }))
+    .subscribe(({ data })=> {
+      console.log(data)
     })
   }
 }
