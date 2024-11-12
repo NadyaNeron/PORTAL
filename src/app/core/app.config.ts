@@ -25,6 +25,7 @@ import { authInterceptor } from "./providers/auth.interceptor";
 import { AuthGuard } from "./providers/auth.guard";
 import { usersFeature } from "../state/users/users.reducer";
 import { UsersEffects } from "../state/users/user.effects";
+import {DragDropModule} from '@angular/cdk/drag-drop';
 
 registerLocaleData(ru);
 
@@ -67,6 +68,7 @@ const routes: Routes = [
 export const appConfig: ApplicationConfig = {
   providers: [
     AuthGuard,
+    DragDropModule,
     provideAnimations(),
     provideRouter(routes),
     provideProtractorTestingSupport(),

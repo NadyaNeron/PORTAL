@@ -7,7 +7,7 @@ import { UserShort } from 'src/app/shared/types/user.short';
 @Component({
   selector: 'app-employee-card',
   standalone: true,
-  imports: [TuiCardLarge, TuiHeader, TuiAppearance, CardComponent],
+  imports: [CardComponent],
   template: `
     <app-card (click)="goToEmployeePage()" [title]="employee().name" [subTitle]="employee().role">
       <div class="image-container">

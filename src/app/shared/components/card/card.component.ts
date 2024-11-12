@@ -1,3 +1,5 @@
+import { CdkDrag } from '@angular/cdk/drag-drop';
+import { CommonModule } from '@angular/common';
 import { Component, input } from '@angular/core';
 import { TuiAppearance, TuiTitle } from '@taiga-ui/core';
 import { TuiCardLarge, TuiHeader } from '@taiga-ui/layout';
@@ -5,9 +7,9 @@ import { TuiCardLarge, TuiHeader } from '@taiga-ui/layout';
 @Component({
   selector: 'app-card',
   standalone: true,
-  imports: [TuiAppearance, TuiCardLarge, TuiHeader, TuiTitle],
+  imports: [TuiAppearance,  TuiCardLarge, TuiHeader, TuiTitle],
   template: `
-      <div
+    <div
           tuiAppearance="floating"
           tuiCardLarge
           tuiHeader

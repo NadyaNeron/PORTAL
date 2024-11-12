@@ -6,6 +6,8 @@ export const UsersActions = createActionGroup({
     events: {
       Success: props<{ users: UserShort[]}>(),
       Error: props<{ error: string }>(),
+      "Move Item": props<{previousIndex:number, currentIndex:number}>()
+
     },
 })
 export const UsersPageActions = createActionGroup({

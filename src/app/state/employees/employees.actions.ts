@@ -6,6 +6,7 @@ export const EmployeesActions = createActionGroup({
   events: {
     Success: props<{ employees: EmployeeShort[]}>(),
     Error: props<{ error: string }>(),
+    "Move Item": props<{previousIndex:number, currentIndex:number}>()
   },
 });
 
